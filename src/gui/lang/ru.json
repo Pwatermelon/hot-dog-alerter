@@ -1,0 +1,12 @@
+{
+  "app_title": "Хот-Дог Алертер",
+  "open_video": "Открыть видео",
+  "start_detection": "Начать детекцию",
+  "stop_detection": "Остановить детекцию",
+  "settings": "Настройки",
+  "language": "Язык",
+  "select_video": "Выберите видеофайл",
+  "detection_in_progress": "Детекция в процессе...",
+  "no_video_selected": "Видео не выбрано",
+  "exit": "Выход"
+} 

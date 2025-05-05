@@ -1,0 +1,12 @@
+{
+  "app_title": "Hot-Dog Alerter",
+  "open_video": "Open Video",
+  "start_detection": "Start Detection",
+  "stop_detection": "Stop Detection",
+  "settings": "Settings",
+  "language": "Language",
+  "select_video": "Select a video file",
+  "detection_in_progress": "Detection in progress...",
+  "no_video_selected": "No video selected",
+  "exit": "Exit"
+} 

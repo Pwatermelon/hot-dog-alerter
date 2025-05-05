@@ -1,0 +1,5 @@
+opencv-python
+ultralytics
+torch
+PyQt5
+jsonschema 
