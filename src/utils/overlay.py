@@ -3,8 +3,8 @@ import os
 import time
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
 from PyQt5.QtGui import QPainter, QColor, QPen, QFont
-from PyQt5.QtCore import Qt, QRect, pyqtSignal, QTimer
-from PyQt5.QtMultimedia import QSound
+from PyQt5.QtCore import Qt, QRect, pyqtSignal, QTimer, QUrl
+from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 
 # Добавляем пути импорта
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -36,10 +36,14 @@ class DetectionOverlay(QWidget):
         self.hide_timer.timeout.connect(self.check_boxes_age)
         self.hide_timer.start(1000)  # Проверка каждую секунду
         
-        # Подготавливаем звук, если его файл существует
-        self.sound = None
+        # Подготавливаем медиаплеер для звуков
+        self.sound_player = None
         if self.sound_enabled and os.path.exists(self.sound_file):
-            self.sound = QSound(self.sound_file)
+            self.sound_player = QMediaPlayer()
+            # Проверяем расширение файла
+            file_url = QUrl.fromLocalFile(self.sound_file)
+            self.sound_player.setMedia(QMediaContent(file_url))
+            self.sound_player.setVolume(70)  # Громкость 70%
         
         self.init_ui()
         
@@ -92,13 +96,21 @@ class DetectionOverlay(QWidget):
         """
         Воспроизводит звук уведомления, если прошло достаточно времени с момента последнего звука.
         """
-        if not self.sound_enabled or not self.sound:
+        if not self.sound_enabled or not self.sound_player:
             return
         
         current_time = int(time.time() * 1000)  # Текущее время в мс
         if current_time - self.last_sound_time >= self.min_sound_interval:
-            self.sound.play()
+            # Если плеер уже играет, сначала остановим его
+            if self.sound_player.state() == QMediaPlayer.PlayingState:
+                self.sound_player.stop()
+            
+            # Начинаем воспроизведение
+            self.sound_player.play()
             self.last_sound_time = current_time
+            
+            # Выводим отладочную информацию
+            print(f"Воспроизведение звука: {self.sound_file}")
         
     def update_boxes(self, boxes):
         """
@@ -182,6 +194,11 @@ class DetectionOverlay(QWidget):
         Обрабатывает закрытие оверлея.
         """
         self.hide_timer.stop()
+        
+        # Останавливаем медиаплеер, если он существует
+        if self.sound_player:
+            self.sound_player.stop()
+            
         self.closed.emit()
         event.accept()
         

@@ -28,5 +28,9 @@
   "frame_color": "Frame color:",
   "select_frame_color": "Select frame color",
   "hide_timeout": "Hide frames after:",
-  "seconds": "sec"
+  "seconds": "sec",
+  "use_sound": "Sound notifications",
+  "sound_interval": "Notification interval:",
+  "sound_notification": "Hot dog detected!",
+  "sound_settings": "Sound Settings"
 } 

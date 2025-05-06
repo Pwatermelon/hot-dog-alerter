@@ -20,6 +20,6 @@ OVERLAY_SETTINGS = {
 # Настройки звуковых уведомлений
 SOUND_SETTINGS = {
     "enabled": True,  # Звуковые уведомления включены по умолчанию
-    "sound_file": os.path.join(os.path.dirname(os.path.dirname(__file__)), "sounds", "notification.wav"),  # Звук уведомления
+    "sound_file": os.path.join(os.path.dirname(os.path.dirname(__file__)), "sounds", "hotdog_alert.mp3"),  # Звук уведомления (поддерживает MP3)
     "min_interval": 2000,  # Минимальный интервал между звуковыми уведомлениями (мс)
 } 
