@@ -28,5 +28,9 @@
   "frame_color": "Цвет рамки:",
   "select_frame_color": "Выберите цвет рамки",
   "hide_timeout": "Время до скрытия рамок:",
-  "seconds": "сек."
+  "seconds": "сек.",
+  "use_sound": "Звуковые уведомления",
+  "sound_interval": "Интервал между уведомлениями:",
+  "sound_notification": "Обнаружен хот-дог!",
+  "sound_settings": "Настройки звука"
 } 
