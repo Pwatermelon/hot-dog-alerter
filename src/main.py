@@ -1,12 +1,59 @@
-from gui.app import MainWindow
-from PyQt5.QtWidgets import QApplication
 import sys
+import os
+
+# Добавляем родительскую директорию в путь для импорта
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)  # Добавляем корневую директорию проекта
+
+# Импорты из нашего приложения
+from PyQt5.QtWidgets import QApplication
+from src.gui.app import MainWindow  # Используем абсолютный импорт
+
+def print_logo():
+    """Выводит ASCII-логотип приложения при запуске"""
+    logo = """
+    ╭───────────────────────────────────────────────╮
+    │                                               │
+    │   ██╗  ██╗ ██████╗ ████████╗      ██████╗     │
+    │   ██║  ██║██╔═══██╗╚══██╔══╝     ██╔═══██╗    │
+    │   ███████║██║   ██║   ██║  █████╗██║   ██║    │
+    │   ██╔══██║██║   ██║   ██║  ╚════╝██║   ██║    │
+    │   ██║  ██║╚██████╔╝   ██║        ╚██████╔╝    │
+    │   ╚═╝  ╚═╝ ╚═════╝    ╚═╝         ╚═════╝     │
+    │                                               │
+    │  ██████╗  ██████╗  ██████╗                    │
+    │  ██╔══██╗██╔═══██╗██╔════╝                    │
+    │  ██║  ██║██║   ██║██║  ███╗                   │
+    │  ██║  ██║██║   ██║██║   ██║                   │
+    │  ██████╔╝╚██████╔╝╚██████╔╝                   │
+    │  ╚═════╝  ╚═════╝  ╚═════╝                    │
+    │                                               │
+    │    █████╗ ██╗     ███████╗██████╗ ████████╗   │
+    │   ██╔══██╗██║     ██╔════╝██╔══██╗╚══██╔══╝   │
+    │   ███████║██║     █████╗  ██████╔╝   ██║      │
+    │   ██╔══██║██║     ██╔══╝  ██╔══██╗   ██║      │
+    │   ██║  ██║███████╗███████╗██║  ██║   ██║      │
+    │   ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝   ╚═╝      │
+    │                                               │
+    │           версия 1.0.0                        │
+    │                                               │
+    ╰───────────────────────────────────────────────╯
+    """
+    print(logo)
 
 def main():
+    print_logo()
     print("Hot-Dog Alerter запущен. Здесь будет анализ видео и детекция хот-догов.")
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec_()) 
+    print("Запуск приложения...")
+    try:
+        main()
+        app = QApplication(sys.argv)
+        window = MainWindow()
+        window.show()
+        sys.exit(app.exec_())
+    except Exception as e:
+        print(f"Ошибка: {e}")
+        input("Нажмите Enter для выхода...") 

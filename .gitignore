@@ -1,4 +1,94 @@
 # Игнорировать датасеты
 /data/
-# Игнорировать веса моделей (по желанию)
-/models/ 
+
+
+# Скриншоты и результаты детекции
+/screenshots/
+
+# Временные папки PyInstaller
+/build/
+/dist/
+/*.spec
+
+# Временные файлы Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Файлы IDE и редакторов
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# Временные файлы Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Временные файлы macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Файлы логов
+*.log
+
+# Папки данных и моделей (большой размер)
+/runs/
+/src/runs/
+/screenshots/
+
+# Временные файлы Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Файлы IDE и редакторов
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# Файлы PyInstaller
+build/
+dist/
+*.spec
+
+# Другие
+.DS_Store
+Thumbs.db 
