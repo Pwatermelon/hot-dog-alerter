@@ -248,10 +248,6 @@ hot-dog-alerter/
 
 Список всех [участников проекта](https://github.com/username/hot-dog-alerter/contributors).
 
-## 📄 Лицензия
-
-Этот проект лицензирован под MIT License - см. файл [LICENSE](LICENSE) для подробностей.
-
 ---
 
 <div align="center">
