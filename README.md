@@ -243,9 +243,7 @@ hot-dog-alerter/
 
 ## 👨‍💻 Авторы
 
-- **Ваше Имя** - *Первоначальная разработка* - [Ваш профиль GitHub](https://github.com/username)
-
-Список всех [участников проекта](https://github.com/username/hot-dog-alerter/contributors).
+- **platinum_watermelon** - *Первоначальная разработка* - [Ваш профиль GitHub](https://github.com/Pwatermelon)
 
 ---
 
