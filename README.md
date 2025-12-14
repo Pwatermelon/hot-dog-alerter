@@ -2,7 +2,6 @@
 
 <div align="center">
   <img src="https://img.shields.io/badge/Python-3.8+-blue.svg?style=for-the-badge&logo=python" alt="Python 3.8+"/>
-  <img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="MIT License"/>
   <img src="https://img.shields.io/badge/PyQt-5-brightgreen.svg?style=for-the-badge&logo=qt" alt="PyQt5"/>
   <img src="https://img.shields.io/badge/YOLO-v8-yellow.svg?style=for-the-badge" alt="YOLOv8"/>
   <br>
