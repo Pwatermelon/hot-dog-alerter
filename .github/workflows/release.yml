@@ -148,7 +148,8 @@ jobs:
           path: |
             ~/.buildozer
             android/.buildozer
-          key: buildozer-py311-${{ hashFiles('android/buildozer.spec') }}
+          # bump suffix when Android recipe pins change incompatibly
+          key: buildozer-py311-np126-${{ hashFiles('android/buildozer.spec', 'android/recipes/**') }}
 
       - name: Install Buildozer
         run: |
