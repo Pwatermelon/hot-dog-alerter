@@ -42,5 +42,13 @@
   "use_sound": "Звуковые уведомления",
   "sound_interval": "Пауза между сигналами",
   "sound_notification": "Обнаружен хот-дог!",
-  "sound_settings": "Звук"
+  "sound_settings": "Звук",
+  "alert_sound": "Звук уведомления",
+  "choose_sound": "Выбрать свой звук",
+  "reset_sound": "Стандартный",
+  "preview_sound": "Прослушать",
+  "select_sound": "Выберите аудиофайл",
+  "default_sound": "Стандартный",
+  "custom_sound": "Свой файл",
+  "sound_not_found": "Аудиофайл не найден"
 }

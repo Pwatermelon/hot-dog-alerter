@@ -30,6 +30,7 @@ from src.config import (
     APP_NAME,
     APP_VERSION,
     CONFIDENCE_THRESHOLD,
+    DEFAULT_SOUND_FILE,
     FONT_DIR,
     ICON_PATH,
     MODEL_PATH,
@@ -39,6 +40,7 @@ from src.config import (
 )
 from src.detection.yolo_detector import HotDogDetector
 from src.utils.overlay import DetectionOverlay
+from src.utils.preferences import load_preferences, save_preferences
 from src.utils.screen_capture import ScreenCapture
 
 LANG_DIR = os.path.join(os.path.dirname(__file__), "lang")
@@ -94,6 +96,9 @@ class MainWindow(QMainWindow):
         self.overlay = None
         self.overlay_settings = OVERLAY_SETTINGS.copy()
         self.sound_settings = SOUND_SETTINGS.copy()
+        prefs = load_preferences()
+        self.sound_settings["sound_file"] = prefs.get("sound_file", DEFAULT_SOUND_FILE)
+        SOUND_SETTINGS["sound_file"] = self.sound_settings["sound_file"]
         self.video_signals = WorkerSignals()
         self.video_signals.progress.connect(self._on_video_progress)
         self.video_signals.finished.connect(self._on_video_done)
@@ -315,6 +320,32 @@ class MainWindow(QMainWindow):
         sound_row.addWidget(self.sound_label)
         layout.addLayout(sound_row)
 
+        alert_caption_row = QHBoxLayout()
+        self.alert_sound_caption = QLabel(self.translator.t("alert_sound"))
+        alert_caption_row.addWidget(self.alert_sound_caption)
+        alert_caption_row.addStretch(1)
+        layout.addLayout(alert_caption_row)
+
+        self.sound_file_label = QLabel(self._sound_display_name())
+        self.sound_file_label.setObjectName("hintText")
+        self.sound_file_label.setWordWrap(True)
+        layout.addWidget(self.sound_file_label)
+
+        sound_btns = QHBoxLayout()
+        self.choose_sound_btn = QPushButton(self.translator.t("choose_sound"))
+        self.choose_sound_btn.setObjectName("secondaryBtn")
+        self.choose_sound_btn.clicked.connect(self.choose_custom_sound)
+        self.reset_sound_btn = QPushButton(self.translator.t("reset_sound"))
+        self.reset_sound_btn.setObjectName("ghostBtn")
+        self.reset_sound_btn.clicked.connect(self.reset_alert_sound)
+        self.preview_sound_btn = QPushButton(self.translator.t("preview_sound"))
+        self.preview_sound_btn.setObjectName("ghostBtn")
+        self.preview_sound_btn.clicked.connect(self.preview_alert_sound)
+        sound_btns.addWidget(self.choose_sound_btn, 1)
+        sound_btns.addWidget(self.reset_sound_btn)
+        sound_btns.addWidget(self.preview_sound_btn)
+        layout.addLayout(sound_btns)
+
         line = QFrame()
         line.setObjectName("divider")
         layout.addWidget(line)
@@ -353,6 +384,57 @@ class MainWindow(QMainWindow):
         if self.overlay:
             SOUND_SETTINGS["min_interval"] = value
             self.overlay.min_sound_interval = value
+
+    def _sound_display_name(self) -> str:
+        path = self.sound_settings.get("sound_file") or DEFAULT_SOUND_FILE
+        if os.path.normpath(path) == os.path.normpath(DEFAULT_SOUND_FILE):
+            return f"{self.translator.t('default_sound')}: {os.path.basename(path)}"
+        return f"{self.translator.t('custom_sound')}: {os.path.basename(path)}"
+
+    def _apply_sound_file(self, path: str) -> None:
+        self.sound_settings["sound_file"] = path
+        SOUND_SETTINGS["sound_file"] = path
+        self.sound_file_label.setText(self._sound_display_name())
+        save_preferences({"sound_file": path})
+        if self.overlay:
+            self.overlay.set_sound_file(path)
+
+    def choose_custom_sound(self):
+        file_name, _ = QFileDialog.getOpenFileName(
+            self,
+            self.translator.t("select_sound"),
+            "",
+            "Audio (*.mp3 *.wav *.ogg *.m4a);;All Files (*)",
+        )
+        if not file_name:
+            return
+        if not os.path.exists(file_name):
+            QMessageBox.warning(
+                self, self.translator.t("error"), self.translator.t("sound_not_found")
+            )
+            return
+        self._apply_sound_file(file_name)
+
+    def reset_alert_sound(self):
+        self._apply_sound_file(DEFAULT_SOUND_FILE)
+
+    def preview_alert_sound(self):
+        from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer
+        from PyQt5.QtCore import QUrl
+
+        path = self.sound_settings.get("sound_file") or DEFAULT_SOUND_FILE
+        if not os.path.exists(path):
+            QMessageBox.warning(
+                self, self.translator.t("error"), self.translator.t("sound_not_found")
+            )
+            return
+        if not hasattr(self, "_preview_player") or self._preview_player is None:
+            self._preview_player = QMediaPlayer()
+            self._preview_player.setVolume(70)
+        if self._preview_player.state() == QMediaPlayer.PlayingState:
+            self._preview_player.stop()
+        self._preview_player.setMedia(QMediaContent(QUrl.fromLocalFile(path)))
+        self._preview_player.play()
 
     def open_video(self):
         file_name, _ = QFileDialog.getOpenFileName(
@@ -424,6 +506,11 @@ class MainWindow(QMainWindow):
         self.color_caption.setText(self.translator.t("frame_color"))
         self.hide_caption.setText(self.translator.t("hide_timeout"))
         self.sound_caption.setText(self.translator.t("sound_interval"))
+        self.alert_sound_caption.setText(self.translator.t("alert_sound"))
+        self.choose_sound_btn.setText(self.translator.t("choose_sound"))
+        self.reset_sound_btn.setText(self.translator.t("reset_sound"))
+        self.preview_sound_btn.setText(self.translator.t("preview_sound"))
+        self.sound_file_label.setText(self._sound_display_name())
         self.hide_label.setText(
             f"{self.overlay_settings['hide_timeout'] / 1000:.1f} {self.translator.t('seconds')}"
         )
@@ -496,6 +583,8 @@ class MainWindow(QMainWindow):
                     self.overlay = DetectionOverlay()
                     self.overlay.closed.connect(self.stop_screen_capture)
                 self.overlay.enable_sound(use_sound)
+                self.overlay.set_sound_file(self.sound_settings["sound_file"])
+                self.overlay.min_sound_interval = self.sound_settings["min_interval"]
                 self.overlay.show()
                 self.hide()
 

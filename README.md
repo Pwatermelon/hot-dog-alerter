@@ -111,6 +111,13 @@ hot-dog-alerter/
 - Desktop: Windows 10+, macOS 12+, или современный Linux с X11/Wayland
 - Android 7.0+ (arm64)
 
+## Лицензия
+
+[MIT](LICENSE) — можно свободно использовать, менять и распространять проект
+(в том числе в коммерческих целях), сохраняя указание авторства.
+Учёба или компания для выбора MIT не нужны: это просто открытая лицензия
+на твой код.
+
 ## Автор
 
 **platinum_watermelon** — [github.com/Pwatermelon](https://github.com/Pwatermelon)
