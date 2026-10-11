@@ -28,7 +28,8 @@ jobs:
           - os: windows-latest
             artifact: HotDogAlerter-windows-x64.exe
             binary: dist/HotDogAlerter.exe
-          - os: macos-13
+          # macos-13 снят (Dec 2025). Intel → macos-15-intel, Apple Silicon → macos-14/15
+          - os: macos-15-intel
             artifact: HotDogAlerter-macos-x64
             binary: dist/HotDogAlerter
           - os: macos-14

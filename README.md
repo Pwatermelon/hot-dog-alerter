@@ -31,8 +31,8 @@
 | Платформа | Файл |
 |-----------|------|
 | Windows x64 | `HotDogAlerter-windows-x64.exe` |
-| macOS Intel | `HotDogAlerter-macos-x64` |
-| macOS Apple Silicon | `HotDogAlerter-macos-arm64` |
+| macOS Intel (x64) | `HotDogAlerter-macos-x64` |
+| macOS Apple Silicon (M1+) | `HotDogAlerter-macos-arm64` |
 | Linux x64 | `HotDogAlerter-linux-x64` |
 | Android | `HotDogAlerter-android.apk` |
 
