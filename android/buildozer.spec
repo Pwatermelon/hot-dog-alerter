@@ -5,7 +5,7 @@ package.domain = com.pwatermelon
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,onnx,mp3,ttf
 source.include_patterns = models/*,sounds/*
-version = 1.1.3
+version = 1.1.5
 requirements = python3,kivy==2.3.0,numpy,opencv,pillow,pyjnius,android,requests
 orientation = portrait
 fullscreen = 0
@@ -17,8 +17,9 @@ android.accept_sdk_license = True
 android.archs = arm64-v8a
 android.allow_backup = True
 p4a.branch = develop
+# Локальный фикс libthorvg под NDK lib64/clang
+p4a.local_recipes = ./recipes
 android.release_artifact = apk
-# Не спрашивать подтверждения в CI
 android.skip_update = False
 
 [buildozer]
