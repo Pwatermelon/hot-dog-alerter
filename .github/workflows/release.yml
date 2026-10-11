@@ -66,6 +66,7 @@ jobs:
         run: brew install upx || true
 
       - name: Ensure ONNX model
+        shell: bash
         run: |
           if [ ! -f models/yolov8n.onnx ]; then
             python -m pip install -U pip
@@ -120,11 +121,15 @@ jobs:
 
       - name: Build APK with Buildozer (Docker)
         run: |
+          # Образ уже имеет ENTRYPOINT=buildozer — передаём только аргументы
+          mkdir -p "$HOME/.buildozer"
           docker run --rm \
             -v "$PWD/android":/home/user/hostcwd \
+            -v "$HOME/.buildozer":/home/user/.buildozer \
             -w /home/user/hostcwd \
+            --entrypoint buildozer \
             kivy/buildozer:latest \
-            buildozer -v android debug
+            -v android debug
 
       - name: Collect APK
         shell: bash
