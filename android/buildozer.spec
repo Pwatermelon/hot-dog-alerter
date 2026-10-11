@@ -5,9 +5,9 @@ package.domain = com.pwatermelon
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,onnx,mp3,ttf
 source.include_patterns = models/*,sounds/*
-version = 1.1.6
-# python 3.14 ломает сборку numpy под NDK — фиксируем 3.11 + numpy 1.26
-requirements = python3==3.11.10,kivy==2.3.0,numpy==1.26.4,opencv,pillow,pyjnius,android,requests
+version = 1.1.7
+# hostpython3 и python3 должны совпадать; 3.14 ломает numpy под NDK
+requirements = hostpython3==3.11.10,python3==3.11.10,kivy==2.3.0,numpy==1.26.4,opencv,pillow,pyjnius,android,requests
 orientation = portrait
 fullscreen = 0
 android.permissions = CAMERA,INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
