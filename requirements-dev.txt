@@ -1,0 +1,5 @@
+-r requirements.txt
+pyinstaller>=6.0,<7
+ultralytics>=8.0,<9
+onnx>=1.14,<2
+onnxsim>=0.4; platform_system != "Darwin" or platform_machine != "arm64"

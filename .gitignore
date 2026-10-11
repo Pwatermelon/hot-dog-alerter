@@ -1,94 +1,47 @@
-# Игнорировать датасеты
+# Data / runtime
 /data/
-
-
-# Скриншоты и результаты детекции
 /screenshots/
+/runs/
+/src/runs/
 
-# Временные папки PyInstaller
+# Build outputs
 /build/
 /dist/
 /*.spec
+android/.buildozer/
+android/bin/
+android/.gradle/
+android/models/
+android/sounds/
 
-# Временные файлы Python
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Файлы IDE и редакторов
-.idea/
-.vscode/
-*.swp
-*.swo
-*~
-.project
-.pydevproject
-.settings/
-
-# Временные файлы Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# Временные файлы macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-Icon
-._*
-
-# Файлы логов
-*.log
-
-# Папки данных и моделей (большой размер)
-/runs/
-/src/runs/
-/screenshots/
-
-# Временные файлы Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
 *.egg-info/
+.eggs/
 .installed.cfg
 *.egg
 
-# Файлы IDE и редакторов
+# Virtual envs
+.venv/
+venv/
+env/
+ENV/
+
+# IDE / OS
 .idea/
 .vscode/
+.DS_Store
+Thumbs.db
 *.swp
 *.swo
 *~
-.project
-.pydevproject
-.settings/
 
-# Файлы PyInstaller
-build/
-dist/
-*.spec
+# Logs
+*.log
 
-# Другие
-.DS_Store
-Thumbs.db 
+# Optional local PyTorch weights (runtime uses models/yolov8n.onnx)
+models/*.pt

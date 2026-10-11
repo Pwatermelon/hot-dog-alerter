@@ -1,0 +1,8 @@
+.buildozer/
+bin/
+.gradle/
+models/
+sounds/
+__pycache__/
+*.apk
+*.aab

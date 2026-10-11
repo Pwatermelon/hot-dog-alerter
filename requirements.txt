@@ -1,6 +1,5 @@
-opencv-python
-ultralytics
-torch
-PyQt5
-jsonschema
-pyautogui 
+opencv-python-headless>=4.8,<5
+numpy>=1.24,<3
+PyQt5>=5.15,<5.16
+mss>=9.0,<11
+Pillow>=10.0,<12

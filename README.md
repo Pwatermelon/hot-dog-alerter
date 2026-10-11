@@ -1,255 +1,120 @@
-# 🌭 Hot-Dog Alerter
-
-<div align="center">
-  <img src="https://img.shields.io/badge/Python-3.8+-blue.svg?style=for-the-badge&logo=python" alt="Python 3.8+"/>
-  <img src="https://img.shields.io/badge/PyQt-5-brightgreen.svg?style=for-the-badge&logo=qt" alt="PyQt5"/>
-  <img src="https://img.shields.io/badge/YOLO-v8-yellow.svg?style=for-the-badge" alt="YOLOv8"/>
-  <br>
-  <h3>🔍 Мгновенное обнаружение хот-догов на экране и в видео с помощью нейросети</h3>
-</div>
+# Hot-Dog Alerter
 
 <p align="center">
-  <img src="docs/screenshots/preview.gif" alt="Hot-Dog Alerter Demo" width="600"/>
+  <img src="assets/icons/app.png" alt="Hot-Dog Alerter" width="120"/>
 </p>
-
-Hot-Dog Alerter — это кроссплатформенное приложение для ПК, которое анализирует видео или захват экрана в реальном времени и выделяет хот-доги зелёными рамками с помощью нейросети YOLO и OpenCV. Не пропустите ни одного хот-дога в вашей жизни!
-
-## 📑 Содержание
-
-- [✨ Возможности](#-возможности)
-- [🔧 Технологии](#-технологии)
-- [🚀 Установка](#-установка)
-- [📋 Использование](#-использование)
-- [⚙️ Настройки](#-настройки)
-- [🏗️ Структура проекта](#-структура-проекта)
-- [📦 Сборка в EXE](#-сборка-в-exe)
-- [🔮 Планы на будущее](#-планы-на-будущее)
-- [👨‍💻 Авторы](#-авторы)
-- [📄 Лицензия](#-лицензия)
-
-## ✨ Возможности
-
-<table>
-  <tr>
-    <td>
-      <h3>🎥 Анализ видео</h3>
-      <p>Загрузите любое видео и найдите все хот-доги на нем</p>
-    </td>
-    <td>
-      <h3>🖥️ Захват экрана</h3>
-      <p>Обнаруживайте хот-доги в реальном времени во время просмотра видео или сайтов</p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <h3>👁️ Прозрачный оверлей</h3>
-      <p>Рамки отображаются поверх других окон, не мешая работе</p>
-    </td>
-    <td>
-      <h3>🔔 Звуковые уведомления</h3>
-      <p>Получайте звуковой сигнал при каждом обнаружении хот-дога</p>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <h3>🎨 Настройка отображения</h3>
-      <p>Измените цвет и стиль рамок по своему вкусу</p>
-    </td>
-    <td>
-      <h3>🌐 Многоязычность</h3>
-      <p>Поддержка русского и английского языков</p>
-    </td>
-  </tr>
-</table>
-
-### Дополнительные функции
-
-- **Автоматическое скрытие рамок** — если хот-доги не обнаруживаются некоторое время
-- **Настройка чувствительности** — регулировка порога обнаружения для точных результатов
-- **Регулировка громкости** — настройка звуковых оповещений
-- **Режим демонстрации** — для показа работы нейросети
-
-## 🔧 Технологии
-
-<table>
-  <tr>
-    <td><img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/python/python.png" alt="Python" width="40" height="40"/></td>
-    <td><b>Python 3.8+</b> — основной язык разработки</td>
-  </tr>
-  <tr>
-    <td><img src="https://raw.githubusercontent.com/ultralytics/assets/main/logo/Ultralytics_Logotype_Square.png" alt="YOLOv8" width="40" height="40"/></td>
-    <td><b>YOLOv8</b> — современная нейросеть для обнаружения объектов</td>
-  </tr>
-  <tr>
-    <td><img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/opencv/opencv.png" alt="OpenCV" width="40" height="40"/></td>
-    <td><b>OpenCV</b> — библиотека компьютерного зрения</td>
-  </tr>
-  <tr>
-    <td><img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Qt_logo_2016.svg" alt="PyQt5" width="40" height="40"/></td>
-    <td><b>PyQt5</b> — фреймворк для создания графического интерфейса</td>
-  </tr>
-  <tr>
-    <td><img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/numpy/numpy.png" alt="NumPy" width="40" height="40"/></td>
-    <td><b>NumPy</b> — библиотека для работы с многомерными массивами</td>
-  </tr>
-</table>
-
-## 🚀 Установка
-
-### Вариант 1: Скачать готовый EXE-файл (только для Windows)
-
-1. Скачайте последнюю версию с [страницы релизов](https://github.com/username/hot-dog-alerter/releases)
-2. Распакуйте архив
-3. Запустите `HotDogAlerter.exe`
-
-### Вариант 2: Установка из исходного кода
-
-#### Предварительные требования
-- Python 3.8 или выше
-- Git (опционально)
-
-#### Шаги установки
-
-1. Клонируйте или скачайте репозиторий:
-   ```bash
-   git clone https://github.com/username/hot-dog-alerter.git
-   cd hot-dog-alerter
-   ```
-
-2. Установите зависимости:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. Скачайте модель YOLOv8n (если её нет):
-   ```bash
-   mkdir -p models
-   # Скачивание с официального репозитория Ultralytics
-   wget -O models/yolov8n.pt https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8n.pt
-   ```
-
-4. Запустите приложение:
-   ```bash
-   python src/main.py
-   ```
-
-## 📋 Использование
-
-### Анализ видеофайлов
 
 <p align="center">
-  <img src="docs/screenshots/video_tab.png" alt="Video Tab" width="500"/>
+  <a href="https://github.com/Pwatermelon/hot-dog-alerter/releases"><img src="https://img.shields.io/github/v/release/Pwatermelon/hot-dog-alerter?style=flat-square&color=f5c518&label=release" alt="Release"/></a>
+  <a href="https://github.com/Pwatermelon/hot-dog-alerter/actions/workflows/release.yml"><img src="https://img.shields.io/github/actions/workflow/status/Pwatermelon/hot-dog-alerter/release.yml?style=flat-square&label=build" alt="Build"/></a>
+  <img src="https://img.shields.io/badge/python-3.10%2B-blue?style=flat-square" alt="Python"/>
+  <img src="https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Android-brightgreen?style=flat-square" alt="Platforms"/>
+  <img src="https://img.shields.io/badge/inference-OpenCV%20DNN%20%2B%20ONNX-orange?style=flat-square" alt="Inference"/>
 </p>
 
-1. Запустите приложение
-2. Перейдите на вкладку **Видео**
-3. Нажмите **Открыть видео** и выберите видеофайл
-4. Нажмите **Начать детекцию**
-5. После обработки, видео с обнаруженными хот-догами будет сохранено рядом с оригиналом
-
-### Детекция в реальном времени
-
-<p align="center">
-  <img src="docs/screenshots/screen_tab.png" alt="Screen Capture Tab" width="500"/>
-</p>
-
-1. Запустите приложение
-2. Перейдите на вкладку **Захват экрана**
-3. Настройте:
-   - Частоту кадров (FPS) — больше значение требует больше ресурсов
-   - Включите/выключите оверлей
-   - Включите/выключите звуковые уведомления
-4. Нажмите **Начать захват экрана**
-5. Для выхода нажмите **ESC** или красную кнопку ✕ в левом верхнем углу оверлея
-
-## ⚙️ Настройки
-
-<p align="center">
-  <img src="docs/screenshots/settings_tab.png" alt="Settings Tab" width="500"/>
-</p>
-
-### Основные настройки
-- **Язык**: Выбор языка интерфейса (русский/английский)
-- **Порог уверенности**: Регулировка чувствительности обнаружения (0.01-0.95)
-
-### Настройки оверлея
-- **Цвет рамки**: Выбор цвета рамки вокруг найденных хот-догов
-- **Время до скрытия**: Время в секундах, после которого рамки автоматически скрываются
-- **Интервал уведомлений**: Минимальная пауза между звуковыми сигналами
-
-### Горячие клавиши
-- **ESC**: Закрыть оверлей
-- **Alt+Tab**: Переключение между приложениями без прерывания захвата экрана
-
-## 🏗️ Структура проекта
-
-```
-hot-dog-alerter/
-│
-├── README.md                    # Общее описание проекта
-├── TECHNICAL.md                 # Техническое описание алгоритмов
-├── requirements.txt             # Зависимости Python
-├── build_exe.py                 # Скрипт для сборки EXE-файла
-├── src/                         # Исходный код
-│   ├── main.py                  # Точка входа приложения
-│   ├── config.py                # Конфигурационные параметры
-│   ├── gui/                     # Графический интерфейс
-│   │   ├── app.py               # Главное окно приложения
-│   │   └── lang/                # Языковые файлы
-│   │       ├── ru.json          # Русский
-│   │       └── en.json          # Английский
-│   ├── detection/               # Модули детекции
-│   │   └── yolo_detector.py     # Детектор на основе YOLO
-│   └── utils/                   # Вспомогательные модули
-│       ├── overlay.py           # Прозрачный оверлей
-│       └── screen_capture.py    # Захват экрана
-│
-├── models/                      # Модели нейросети (не включены в репозиторий)
-│   └── yolov8n.pt               # Модель YOLOv8 nano
-│
-├── sounds/                      # Звуковые файлы
-│   └── hotdog_alert.mp3         # Звук при обнаружении хот-дога
-│
-└── docs/                        # Документация
-    └── screenshots/             # Скриншоты для README
-```
-
-## 📦 Сборка в EXE
-
-Приложение можно скомпилировать в исполняемый файл для Windows с помощью PyInstaller:
-
-1. Убедитесь, что установлен PyInstaller:
-   ```bash
-   pip install pyinstaller
-   ```
-
-2. Запустите скрипт сборки:
-   ```bash
-   python build_exe.py
-   ```
-
-3. Готовый EXE-файл будет находиться в папке `dist/`
-
-> **Примечание**: Размер файла может быть довольно большим (~100-200 МБ) из-за включенных библиотек нейросети и OpenCV.
-
-## 🔮 Планы на будущее
-
-- [ ] **Мобильное приложение** для Android и iOS
-- [ ] **Распознавание других продуктов питания** (не только хот-догов)
-- [ ] **Облачное хранение** с доступом к статистике
-- [ ] **Интеграция с социальными сетями** для публикации находок
-- [ ] **Режим AR** с дополненной реальностью
-- [ ] **Распознавание ингредиентов** в хот-доге
-
-## 👨‍💻 Авторы
-
-- **platinum_watermelon** - *Первоначальная разработка* - [Ваш профиль GitHub](https://github.com/Pwatermelon)
+<p align="center"><b>Локальный детектор хот-догов</b> для экрана, видео и камеры Android.<br/>Без облака, без PyTorch в рантайме — компактные бинарники из GitHub Releases.</p>
 
 ---
 
-<div align="center">
-  <p>Сделано с ❤️ для любителей хот-догов</p>
-  <p>
-    <a href="#-hot-dog-alerter">⬆️ Вернуться наверх ⬆️</a>
-  </p>
-</div>
+## Что умеет
+
+- Анализ видеофайлов с сохранением размеченного результата
+- Захват экрана в реальном времени + прозрачный оверлей
+- Звуковой алерт при обнаружении
+- RU / EN интерфейс, настройка порога и цвета рамок
+- Android APK — детекция через камеру
+
+## Скачать
+
+Готовые сборки появляются в [Releases](https://github.com/Pwatermelon/hot-dog-alerter/releases) после пуша тега `v*`:
+
+| Платформа | Файл |
+|-----------|------|
+| Windows x64 | `HotDogAlerter-windows-x64.exe` |
+| macOS Intel | `HotDogAlerter-macos-x64` |
+| macOS Apple Silicon | `HotDogAlerter-macos-arm64` |
+| Linux x64 | `HotDogAlerter-linux-x64` |
+| Android | `HotDogAlerter-android.apk` |
+
+```bash
+# Создать релиз (из корня репозитория)
+git tag v1.1.0
+git push origin v1.1.0
+```
+
+Или вручную: **Actions → Build & Release → Run workflow**.
+
+## Быстрый старт из исходников
+
+```bash
+git clone https://github.com/Pwatermelon/hot-dog-alerter.git
+cd hot-dog-alerter
+
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+
+# модель models/yolov8n.onnx уже в репозитории;
+# пересобрать: pip install ultralytics onnx && python scripts/export_onnx.py
+
+python src/main.py
+```
+
+## Локальная сборка бинарника
+
+```bash
+pip install -r requirements-dev.txt
+python scripts/build_desktop.py
+# → dist/HotDogAlerter[.exe]
+```
+
+Сборка **onefile**, без `torch`/`ultralytics` в бандле. Если в системе есть [UPX](https://upx.github.io/), размер дополнительно сжимается.
+
+## Android
+
+Клиент в `android/` (Kivy + OpenCV DNN + та же ONNX-модель). CI собирает debug APK через Buildozer.
+
+Локально (Linux):
+
+```bash
+cp models/yolov8n.onnx android/models/
+cd android
+buildozer android debug
+```
+
+## Почему бинарники легче
+
+Раньше рантайм тянул **PyTorch + Ultralytics** (сотни МБ). Сейчас:
+
+1. YOLOv8n экспортирован в **ONNX** (`imgsz=320`)
+2. Инференс через **OpenCV DNN**
+3. Захват экрана через **mss** вместо pyautogui
+4. PyInstaller excludes + опциональный UPX
+
+## Структура
+
+```
+hot-dog-alerter/
+├── src/                  # десктоп (PyQt5)
+├── android/              # APK (Kivy)
+├── models/yolov8n.onnx   # компактная модель
+├── assets/               # стили, шрифты, иконка
+├── scripts/              # export + build
+└── .github/workflows/    # CI и релизы
+```
+
+Подробности алгоритмов — в [TECHNICAL.md](TECHNICAL.md).
+
+## Требования
+
+- Python 3.10+
+- Desktop: Windows 10+, macOS 12+, или современный Linux с X11/Wayland
+- Android 7.0+ (arm64)
+
+## Автор
+
+**platinum_watermelon** — [github.com/Pwatermelon](https://github.com/Pwatermelon)
+
+---
+
+Сделано для тех, кто не пропускает ни одного хот-дога.

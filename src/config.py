@@ -1,25 +1,42 @@
-# Конфигурация приложения
-# Используем стандартную модель YOLOv8, которая уже умеет распознавать хот-доги (класс 52)
+"""Глобальная конфигурация Hot-Dog Alerter."""
 import os
-MODEL_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "models", "yolov8n.pt")  # Путь к весам YOLO
-CONFIDENCE_THRESHOLD = 0.35  # Пониженный порог уверенности для лучшей детекции хот-догов
-NMS_THRESHOLD = 0.4
-CLASSES = {
-    52: "hot dog",  # Класс 52 в COCO - это хот-дог
-}
+import sys
 
-# Настройки оверлея
+
+def resource_path(*parts: str) -> str:
+    """Путь к ресурсу: работает и из исходников, и из PyInstaller-бандла."""
+    if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+        base = sys._MEIPASS
+    else:
+        base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base, *parts)
+
+
+APP_NAME = "Hot-Dog Alerter"
+APP_VERSION = "1.1.0"
+
+# Модель: компактный ONNX (без torch/ultralytics в рантайме)
+MODEL_PATH = resource_path("models", "yolov8n.onnx")
+MODEL_INPUT_SIZE = 320
+CONFIDENCE_THRESHOLD = 0.35
+NMS_THRESHOLD = 0.45
+HOTDOG_CLASS_ID = 52
+CLASSES = {HOTDOG_CLASS_ID: "hot dog"}
+
 OVERLAY_SETTINGS = {
-    "hide_timeout": 3000,  # Время в мс, через которое скрываются прямоугольники, если нет хот-догов
-    "button_color": "rgba(255, 0, 0, 200)",  # Цвет кнопки закрытия
-    "frame_color": (0, 255, 0),  # Цвет рамки (зеленый)
-    "text_bg_color": (0, 0, 0, 180),  # Цвет фона текста
-    "text_color": (255, 255, 255),  # Цвет текста
+    "hide_timeout": 3000,
+    "button_color": "rgba(214, 40, 40, 220)",
+    "frame_color": (245, 197, 24),
+    "text_bg_color": (26, 21, 18, 200),
+    "text_color": (255, 248, 230),
 }
 
-# Настройки звуковых уведомлений
 SOUND_SETTINGS = {
-    "enabled": True,  # Звуковые уведомления включены по умолчанию
-    "sound_file": os.path.join(os.path.dirname(os.path.dirname(__file__)), "sounds", "hotdog_alert.mp3"),  # Звук уведомления (поддерживает MP3)
-    "min_interval": 2000,  # Минимальный интервал между звуковыми уведомлениями (мс)
-} 
+    "enabled": True,
+    "sound_file": resource_path("sounds", "hotdog_alert.mp3"),
+    "min_interval": 2000,
+}
+
+STYLESHEET_PATH = resource_path("assets", "styles", "app.qss")
+FONT_DIR = resource_path("assets", "fonts")
+ICON_PATH = resource_path("assets", "icons", "app.png")

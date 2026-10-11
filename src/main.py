@@ -1,59 +1,46 @@
-import sys
+"""Точка входа Hot-Dog Alerter."""
 import os
+import sys
 
-# Добавляем родительскую директорию в путь для импорта
-current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(current_dir)
-sys.path.insert(0, parent_dir)  # Добавляем корневую директорию проекта
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
 
-# Импорты из нашего приложения
-from PyQt5.QtWidgets import QApplication
-from src.gui.app import MainWindow  # Используем абсолютный импорт
+from PyQt5.QtWidgets import QApplication, QMessageBox
 
-def print_logo():
-    """Выводит ASCII-логотип приложения при запуске"""
-    logo = """
-    ╭───────────────────────────────────────────────╮
-    │                                               │
-    │   ██╗  ██╗ ██████╗ ████████╗      ██████╗     │
-    │   ██║  ██║██╔═══██╗╚══██╔══╝     ██╔═══██╗    │
-    │   ███████║██║   ██║   ██║  █████╗██║   ██║    │
-    │   ██╔══██║██║   ██║   ██║  ╚════╝██║   ██║    │
-    │   ██║  ██║╚██████╔╝   ██║        ╚██████╔╝    │
-    │   ╚═╝  ╚═╝ ╚═════╝    ╚═╝         ╚═════╝     │
-    │                                               │
-    │  ██████╗  ██████╗  ██████╗                    │
-    │  ██╔══██╗██╔═══██╗██╔════╝                    │
-    │  ██║  ██║██║   ██║██║  ███╗                   │
-    │  ██║  ██║██║   ██║██║   ██║                   │
-    │  ██████╔╝╚██████╔╝╚██████╔╝                   │
-    │  ╚═════╝  ╚═════╝  ╚═════╝                    │
-    │                                               │
-    │    █████╗ ██╗     ███████╗██████╗ ████████╗   │
-    │   ██╔══██╗██║     ██╔════╝██╔══██╗╚══██╔══╝   │
-    │   ███████║██║     █████╗  ██████╔╝   ██║      │
-    │   ██╔══██║██║     ██╔══╝  ██╔══██╗   ██║      │
-    │   ██║  ██║███████╗███████╗██║  ██║   ██║      │
-    │   ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝   ╚═╝      │
-    │                                               │
-    │           версия 1.0.0                        │
-    │                                               │
-    ╰───────────────────────────────────────────────╯
-    """
-    print(logo)
+from src.config import APP_NAME, APP_VERSION, MODEL_PATH
+from src.gui.app import MainWindow, apply_theme
 
-def main():
-    print_logo()
-    print("Hot-Dog Alerter запущен. Здесь будет анализ видео и детекция хот-догов.")
+
+def main() -> int:
+    print(f"{APP_NAME} v{APP_VERSION}")
+    app = QApplication(sys.argv)
+    app.setApplicationName(APP_NAME)
+    app.setApplicationVersion(APP_VERSION)
+    apply_theme(app)
+
+    if not os.path.exists(MODEL_PATH):
+        QMessageBox.critical(
+            None,
+            APP_NAME,
+            f"Модель не найдена:\n{MODEL_PATH}\n\n"
+            "Положите yolov8n.onnx в папку models/ "
+            "или выполните: python scripts/export_onnx.py",
+        )
+        return 1
+
+    window = MainWindow()
+    window.show()
+    return app.exec_()
+
 
 if __name__ == "__main__":
-    print("Запуск приложения...")
     try:
-        main()
-        app = QApplication(sys.argv)
-        window = MainWindow()
-        window.show()
-        sys.exit(app.exec_())
-    except Exception as e:
-        print(f"Ошибка: {e}")
-        input("Нажмите Enter для выхода...") 
+        raise SystemExit(main())
+    except Exception as exc:  # noqa: BLE001
+        print(f"Ошибка: {exc}")
+        try:
+            input("Нажмите Enter для выхода...")
+        except EOFError:
+            pass
+        raise SystemExit(1)

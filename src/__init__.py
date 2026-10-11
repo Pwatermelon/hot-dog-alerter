@@ -1,1 +1,1 @@
-# Основной пакет hot-dog-alerter 
+"""Hot-Dog Alerter package."""
