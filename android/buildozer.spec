@@ -5,8 +5,8 @@ package.domain = com.pwatermelon
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,onnx,mp3,ttf
 source.include_patterns = models/*,sounds/*
-version = 1.1.0
-requirements = python3,kivy==2.3.0,numpy,opencv,pillow,pyjnius,android
+version = 1.1.3
+requirements = python3,kivy==2.3.0,numpy,opencv,pillow,pyjnius,android,requests
 orientation = portrait
 fullscreen = 0
 android.permissions = CAMERA,INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
@@ -16,8 +16,10 @@ android.ndk = 25b
 android.accept_sdk_license = True
 android.archs = arm64-v8a
 android.allow_backup = True
-p4a.branch = master
+p4a.branch = develop
 android.release_artifact = apk
+# Не спрашивать подтверждения в CI
+android.skip_update = False
 
 [buildozer]
 log_level = 2

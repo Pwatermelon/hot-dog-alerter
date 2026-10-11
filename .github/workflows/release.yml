@@ -105,36 +105,59 @@ jobs:
     name: Android APK
     runs-on: ubuntu-22.04
     continue-on-error: true
+    timeout-minutes: 180
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            git unzip wget curl \
+            autoconf automake libtool pkg-config \
+            zlib1g-dev libncurses5-dev libncursesw5-dev \
+            libtinfo5 cmake libffi-dev libssl-dev libltdl-dev \
+            build-essential ccache
 
       - name: Prepare Android project
         run: |
           mkdir -p android/models android/sounds
           if [ ! -f models/yolov8n.onnx ]; then
-            python3 -m pip install -U pip ultralytics onnx
-            python3 scripts/export_onnx.py
+            python -m pip install -U pip ultralytics onnx
+            python scripts/export_onnx.py
           fi
           cp models/yolov8n.onnx android/models/
           cp sounds/hotdog_alert.mp3 android/sounds/ || true
           cp assets/icons/app.png android/icon.png || true
 
-      - name: Build APK with Buildozer (Docker)
+      - name: Cache Buildozer
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.buildozer
+            android/.buildozer
+          key: buildozer-py311-${{ hashFiles('android/buildozer.spec') }}
+
+      - name: Install Buildozer
         run: |
-          # ENTRYPOINT образа = buildozer. В CI не спрашиваем про root.
-          mkdir -p "$HOME/.buildozer"
-          # Права: контейнерный user (uid 1000) должен писать в android/
-          sudo chown -R 1000:1000 android "$HOME/.buildozer" || chown -R 1000:1000 android "$HOME/.buildozer" || true
-          docker run --rm \
-            --user 1000:1000 \
-            -e HOME=/home/user \
-            -v "$PWD/android":/home/user/hostcwd \
-            -v "$HOME/.buildozer":/home/user/.buildozer \
-            -w /home/user/hostcwd \
-            --entrypoint buildozer \
-            kivy/buildozer:latest \
-            -v android debug
+          python -m pip install -U pip wheel setuptools
+          python -m pip install "cython<3" "buildozer==1.5.0"
+
+      - name: Build APK
+        working-directory: android
+        run: buildozer -v android debug
 
       - name: Collect APK
         shell: bash
@@ -143,7 +166,7 @@ jobs:
           APK=$(find android -name "*.apk" | head -n 1)
           if [ -z "$APK" ]; then
             echo "APK not found"
-            find android -maxdepth 4 -type f | head -n 200
+            find android -maxdepth 5 -type f | head -n 200
             exit 1
           fi
           cp "$APK" out/HotDogAlerter-android.apk
