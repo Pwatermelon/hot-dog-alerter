@@ -42,5 +42,13 @@
   "use_sound": "Sound alerts",
   "sound_interval": "Alert cooldown",
   "sound_notification": "Hot dog detected!",
-  "sound_settings": "Sound"
+  "sound_settings": "Sound",
+  "alert_sound": "Alert sound",
+  "choose_sound": "Choose custom sound",
+  "reset_sound": "Default",
+  "preview_sound": "Preview",
+  "select_sound": "Select an audio file",
+  "default_sound": "Default",
+  "custom_sound": "Custom file",
+  "sound_not_found": "Audio file not found"
 }

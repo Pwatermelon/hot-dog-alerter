@@ -31,11 +31,16 @@ OVERLAY_SETTINGS = {
     "text_color": (255, 248, 230),
 }
 
+DEFAULT_SOUND_FILE = resource_path("sounds", "hotdog_alert.mp3")
+
 SOUND_SETTINGS = {
     "enabled": True,
-    "sound_file": resource_path("sounds", "hotdog_alert.mp3"),
+    "sound_file": DEFAULT_SOUND_FILE,
     "min_interval": 2000,
 }
+
+# Пользовательские настройки (в т.ч. путь к своему звуку)
+USER_SETTINGS_PATH = os.path.join(os.path.expanduser("~"), ".hotdog_alerter.json")
 
 STYLESHEET_PATH = resource_path("assets", "styles", "app.qss")
 FONT_DIR = resource_path("assets", "fonts")

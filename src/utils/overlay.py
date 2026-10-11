@@ -61,8 +61,25 @@ class DetectionOverlay(QWidget):
     def enable_sound(self, enabled: bool):
         self.sound_enabled = enabled
 
+    def set_sound_file(self, path: str) -> bool:
+        """Подключает файл уведомления (mp3/wav/ogg)."""
+        if not path or not os.path.exists(path):
+            return False
+        self.sound_file = path
+        if self.sound_player is None:
+            self.sound_player = QMediaPlayer()
+            self.sound_player.setVolume(70)
+        if self.sound_player.state() == QMediaPlayer.PlayingState:
+            self.sound_player.stop()
+        self.sound_player.setMedia(QMediaContent(QUrl.fromLocalFile(path)))
+        return True
+
     def play_notification_sound(self):
-        if not self.sound_enabled or not self.sound_player:
+        if not self.sound_enabled:
+            return
+        if self.sound_player is None and self.sound_file and os.path.exists(self.sound_file):
+            self.set_sound_file(self.sound_file)
+        if not self.sound_player:
             return
         now = int(time.time() * 1000)
         if now - self.last_sound_time < self.min_sound_interval:
