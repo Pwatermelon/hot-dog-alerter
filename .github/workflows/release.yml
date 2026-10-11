@@ -122,9 +122,13 @@ jobs:
 
       - name: Build APK with Buildozer (Docker)
         run: |
-          # Образ уже имеет ENTRYPOINT=buildozer — передаём только аргументы
+          # ENTRYPOINT образа = buildozer. В CI не спрашиваем про root.
           mkdir -p "$HOME/.buildozer"
+          # Права: контейнерный user (uid 1000) должен писать в android/
+          sudo chown -R 1000:1000 android "$HOME/.buildozer" || chown -R 1000:1000 android "$HOME/.buildozer" || true
           docker run --rm \
+            --user 1000:1000 \
+            -e HOME=/home/user \
             -v "$PWD/android":/home/user/hostcwd \
             -v "$HOME/.buildozer":/home/user/.buildozer \
             -w /home/user/hostcwd \
